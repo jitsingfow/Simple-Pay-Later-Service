@@ -1,0 +1,29 @@
+{
+  "name": "simple-pay-later-service",
+  "version": "1.0.0",
+  "description": "A simple pay later service like https://getsimpl.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha **test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jitsingfow/Simple-Pay-Later-Service.git"
+  },
+  "keywords": [
+    "Pay",
+    "later",
+    "Simpl",
+    "LazyPay"
+  ],
+  "author": "Nabajit Das",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jitsingfow/Simple-Pay-Later-Service/issues"
+  },
+  "homepage": "https://github.com/jitsingfow/Simple-Pay-Later-Service#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
