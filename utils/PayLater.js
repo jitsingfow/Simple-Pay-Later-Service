@@ -172,7 +172,16 @@ module.exports = {
         });
 
         return discountsByMerchant[indexOfMerchantDiscount].discount;
-    }
+    },
+
+    paybackUser: function (userName, paybackAmount) {
+        var indexOfUser = users.findIndex(function (user) {
+            return user.userName === userName;
+        });
+
+        users[indexOfUser].availableCreditLimit = users[indexOfUser].availableCreditLimit+ paybackAmount;
+        return {user: userName, dues : users[indexOfUser].creditLimit - users[indexOfUser].availableCreditLimit};
+    },
 
 }
 
