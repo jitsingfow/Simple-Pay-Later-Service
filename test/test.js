@@ -75,7 +75,7 @@ describe('Transaction by user to merchant', function(){
 describe('Report users at credit limit', function(){
     it('Should list the user who have reached max credit limit ', function(){
         var users = payLater.reportUserCreditLimit();
-        expect(users).to.eql([user1]);         
+        expect(users).to.eql(['user1']);         
     });
 });
 
