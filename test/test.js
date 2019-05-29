@@ -92,8 +92,8 @@ describe('Transaction by user to merchant', function(){
 
 describe('Report dues of a user', function(){
     it('Should return dues of user1 ', function(){
-        var due = payLater.reportUserDues('user1');
-        expect(due).to.equal(300);         
+        var dues = payLater.reportUserDues('user1');
+        expect(dues).to.equal(300);         
     });
 });
 
