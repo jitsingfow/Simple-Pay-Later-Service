@@ -67,5 +67,10 @@ module.exports = {
             };
             return returnObj;
         }
-    }
+    },
+
+    setInterest: function (rateOfInterest) {
+        interestRate = rateOfInterest;
+        return interestRate;
+    },
 }
