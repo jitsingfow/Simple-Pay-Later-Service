@@ -200,7 +200,19 @@ module.exports = {
             dues: duesOfUsers,
             total: totalDues
         }
+    },
+
+    updateMerchantDiscount: function (merchantName, newDiscount) {
+        var indexOfMerchant = merchants.findIndex(function (merchant) {
+            return merchant.merchantName === merchantName;
+        });
+
+        merchants[indexOfMerchant].discount = newDiscount;
+
+        return { merchant: merchantName, discount: merchants[indexOfMerchant].discount };
     }
+
+
 
 }
 
