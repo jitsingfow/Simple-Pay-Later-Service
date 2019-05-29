@@ -38,7 +38,7 @@ describe('Add Merchant', function(){
     });
     it('Should add a merchant ', function(){
         var merchant = payLater.addMerchant('m3', 'm3@merchants.com', 1.25);         
-        expect(merchant).to.eql({status : true, msg: 'Merchant created', merchant: {merchantName : 'm3', discount: 1.5}});         
+        expect(merchant).to.eql({status : true, msg: 'Merchant created', merchant: {merchantName : 'm3', discount: 1.25}});         
     });
 });
 
