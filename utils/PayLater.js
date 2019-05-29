@@ -138,7 +138,7 @@ module.exports = {
             });
             
             var indexOfMerchantDiscount = discountsByMerchant.findIndex(function (element) {
-                return element.merchantName === merchantName;
+                return element.merchant === merchantName;
             });
             
             if(indexOfMerchantDiscount === -1){
@@ -148,7 +148,7 @@ module.exports = {
                 });
             }
             else{
-                discountsByMerchant[indexOfMerchantDiscount].discount = _calcDiscountOfMerchant(amount, merchants[indexOfMerchant].discount)
+                discountsByMerchant[indexOfMerchantDiscount].discount = discountsByMerchant[indexOfMerchantDiscount].discount +  _calcDiscountOfMerchant(amount, merchants[indexOfMerchant].discount)
             }
             return { status: true, msg: 'success!' }
         }
@@ -165,6 +165,15 @@ module.exports = {
 
         return users[indexOfUser].creditLimit - users[indexOfUser].availableCreditLimit;
     },
+
+    reportMerchantDiscount: function (merchantName) {
+        var indexOfMerchantDiscount = discountsByMerchant.findIndex(function (element) {
+            return element.merchant === merchantName;
+        });
+
+        return discountsByMerchant[indexOfMerchantDiscount].discount;
+    }
+
 }
 
 
