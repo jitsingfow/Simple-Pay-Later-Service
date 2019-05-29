@@ -18,7 +18,8 @@ module.exports = {
             users.push({
                 userName: userName,
                 emailId: emailId,
-                creditLimit: creditLimit
+                creditLimit: creditLimit,
+                availableCreditLimit : creditLimit
             });
 
             returnObj = {
@@ -100,7 +101,7 @@ module.exports = {
             }
         }
 
-        if (amount > users[indexOfUser].creditLimit) {
+        if (amount > users[indexOfUser].availableCreditLimit) {
             //When the transaction amount is greater then credit limt of the user Reject transaction
 
             allTransactions.push({
@@ -120,10 +121,10 @@ module.exports = {
             //if credit limit becomes zero, add user to UserCreditLimit
             //add transaction to allTransactions
             //update discount of marchant
-            var newCreditLimit = users[indexOfUser].creditLimit - amount;
-            users[indexOfUser].creditLimit = newCreditLimit;
+            var newAvailableCreditLimit = users[indexOfUser].availableCreditLimit - amount;
+            users[indexOfUser].availableCreditLimit = newAvailableCreditLimit;
 
-            if (newCreditLimit === 0) {
+            if (newAvailableCreditLimit === 0) {
                 userCreditLimit.push(userName);
             }
 
@@ -155,6 +156,14 @@ module.exports = {
 
     reportUserCreditLimit: function () {
         return userCreditLimit;
+    },
+
+    reportUserDues: function (userName) {
+        var indexOfUser = users.findIndex(function (user) {
+            return user.userName === userName;
+        });
+
+        return users[indexOfUser].creditLimit - users[indexOfUser].availableCreditLimit;
     },
 }
 
