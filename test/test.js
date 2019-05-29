@@ -100,7 +100,7 @@ describe('Report dues of a user', function(){
 describe('Report users at credit limit', function(){
     it('Should list the user who have reached max credit limit ', function(){
         var users = payLater.reportUserCreditLimit();
-        expect(users).to.eql([user1]);         
+        expect(users).to.eql(['user1','user3']);         
     });
 });
 
