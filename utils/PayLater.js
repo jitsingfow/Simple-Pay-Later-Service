@@ -19,7 +19,7 @@ module.exports = {
                 userName: userName,
                 emailId: emailId,
                 creditLimit: creditLimit,
-                availableCreditLimit : creditLimit
+                availableCreditLimit: creditLimit
             });
 
             returnObj = {
@@ -105,7 +105,7 @@ module.exports = {
             //When the transaction amount is greater then credit limt of the user Reject transaction
 
             allTransactions.push({
-                id: allTransactions.length+1,
+                id: allTransactions.length + 1,
                 fromUser: userName,
                 toMerchant: merchantName,
                 txnAmount: amount,
@@ -129,26 +129,26 @@ module.exports = {
             }
 
             allTransactions.push({
-                id: allTransactions.length+1,
+                id: allTransactions.length + 1,
                 fromUser: userName,
                 toMerchant: merchantName,
                 txnAmount: amount,
                 txnStatus: 'sucess',
                 remarks: ''
             });
-            
+
             var indexOfMerchantDiscount = discountsByMerchant.findIndex(function (element) {
                 return element.merchant === merchantName;
             });
-            
-            if(indexOfMerchantDiscount === -1){
+
+            if (indexOfMerchantDiscount === -1) {
                 discountsByMerchant.push({
-                    merchant : merchantName,
+                    merchant: merchantName,
                     discount: _calcDiscountOfMerchant(amount, merchants[indexOfMerchant].discount)
                 });
             }
-            else{
-                discountsByMerchant[indexOfMerchantDiscount].discount = discountsByMerchant[indexOfMerchantDiscount].discount +  _calcDiscountOfMerchant(amount, merchants[indexOfMerchant].discount)
+            else {
+                discountsByMerchant[indexOfMerchantDiscount].discount = discountsByMerchant[indexOfMerchantDiscount].discount + _calcDiscountOfMerchant(amount, merchants[indexOfMerchant].discount)
             }
             return { status: true, msg: 'success!' }
         }
@@ -179,13 +179,32 @@ module.exports = {
             return user.userName === userName;
         });
 
-        users[indexOfUser].availableCreditLimit = users[indexOfUser].availableCreditLimit+ paybackAmount;
-        return {user: userName, dues : users[indexOfUser].creditLimit - users[indexOfUser].availableCreditLimit};
+        users[indexOfUser].availableCreditLimit = users[indexOfUser].availableCreditLimit + paybackAmount;
+        return { user: userName, dues: users[indexOfUser].creditLimit - users[indexOfUser].availableCreditLimit };
     },
+
+    reportTotalDues: function () {
+        var duesOfUsers = [];
+        users.forEach(function (user) {
+            var due = user.creditLimit - user.availableCreditLimit;
+            if (due != 0) {
+                duesOfUsers.push({ user: user.userName, dues: due })
+            }
+        });
+        var totalDues = 0;
+        duesOfUsers.forEach(function (data) {
+            totalDues = totalDues + data.dues
+        });
+
+        return {
+            dues: duesOfUsers,
+            total: totalDues
+        }
+    }
 
 }
 
 
-function _calcDiscountOfMerchant(amount, discount){
-    return amount - (amount - (amount*discount/100));
+function _calcDiscountOfMerchant(amount, discount) {
+    return amount - (amount - (amount * discount / 100));
 }
