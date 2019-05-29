@@ -90,6 +90,13 @@ describe('Transaction by user to merchant', function(){
     });
 });
 
+describe('Report dues of a user', function(){
+    it('Should return dues of user1 ', function(){
+        var due = payLater.reportUserDues('user1');
+        expect(due).to.equal(300);         
+    });
+});
+
 describe('Report users at credit limit', function(){
     it('Should list the user who have reached max credit limit ', function(){
         var users = payLater.reportUserCreditLimit();
