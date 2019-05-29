@@ -151,7 +151,11 @@ module.exports = {
             }
             return { status: true, msg: 'success!' }
         }
-    }
+    },
+
+    reportUserCreditLimit: function () {
+        return userCreditLimit;
+    },
 }
 
 
